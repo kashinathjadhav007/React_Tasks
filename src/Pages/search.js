@@ -2,8 +2,7 @@ import { TextField } from "@mui/material";
 
 const Search=()=>
 {
-
-    return(
+return(
         <>
        <TextField placeholder="search"></TextField>
         </>

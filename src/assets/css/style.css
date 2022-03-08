@@ -1,0 +1,123 @@
+.main{
+  padding: 0;
+  margin: 0;
+  background: white;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+
+}
+.navbar-nav a:hover
+{
+  background: #f44336;;
+}
+input
+{
+    padding: 20px;
+}
+
+.collapse navbar-collapse {
+  flex-grow: 0;
+}
+.toggle-btn
+{
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: space-evenly; */
+    float: right;
+}
+.container-fluid {
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 70px;
+}
+.navbar-nav a :hover {
+  color: blue;
+  background: none;
+}
+.form-inline {
+  display: flex;
+}
+.searchInput {
+  padding: 10px;
+  color: black;
+  width: 300px;
+  border-radius: 10px;
+}
+
+.page-footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
+.banner {
+  background-image: url("../../../src/Images/banner.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 600px;
+  align-items: center;
+  margin-top: -9px;
+}
+.list {
+  margin-right: 53px;
+  display: flex;
+}
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border-radius: 20px;
+  border: none;
+
+  
+  
+}
+.MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiMenu-paper MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiPopover-paper css-a8np1v-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper
+{
+    top: 127px;
+    left: 579px;
+}
+
+.dialog-btn
+{
+  display: flex;
+  justify-content: space-between;
+}
+.menuClass
+{
+    
+    position: absolute;
+   
+    margin-left:550px ;
+    margin-top: -690px;
+    
+}
+
+.inner-class {
+  margin-bottom: 40px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  border-radius: 10px;
+  position: relative;
+
+}
+
+h1
+{
+    text-align: center;
+}
+
+.page-footer
+{
+    height: 40px;
+    border: 1px solid black;
+}
+
+.card
+{
+    position: relative;
+}

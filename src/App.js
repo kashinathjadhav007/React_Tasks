@@ -1,15 +1,20 @@
-import Cards from "./Pages/cards";
-import Faker from "./Pages/faker";
-import Search from "./Pages/search";
+// import "../src/index.css"
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Router from "../src/router"
 
 function App() {
   return (
     <div className="App">
-      {/* <Search></Search> */}
-     <Cards></Cards> 
-     {/* <Faker></Faker> */}
+      <Router/>
+     
     </div>
   );
 }
-
 export default App;
+
+
+
+
+
+
