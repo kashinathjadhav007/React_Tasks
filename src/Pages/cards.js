@@ -64,52 +64,23 @@ export default function Cards() {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [open, setOpen] = React.useState(false);
-  const [open1, setOpen1] = React.useState(false);
-  const [open4, setOpen4] = useState(false);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [name, setName] = useState("");
   const [info, setInfo] = useState("");
   const [show, setShow] = useState(false);
-  const [id, setId] = useState("");
-  const [deleteCreateopen, setDeleteCreateOpen] = useState(false);
-  const [editUserOpen, setEditUserOpen] = useState(false);
-
-  const ref = useRef(null);
-  const handleOpen = () => setOpen(true);
-
-  // const handleClose = () => setOpen(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const [id, setId] = useState("");
+  const ref = useRef(null);
   const open3 = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+    setOpen(false)
   };
 
-  // const handleClickOpen1 = (id) => {
-  //   let item = data[id - 1];
-  //   setTitle(item.title);
-  //   setDate(item.date);
-  //   setName(item.name);
-  //   setInfo(item.info);
-  //   setOpen1(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
-  console.log("set tate", show);
-  const handleClose1 = () => {
-    setOpen1(false);
-  };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -117,16 +88,6 @@ export default function Cards() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const handleEditUserOpen = (tutorialId) => {
-    setId(tutorialId);
-    setEditUserOpen(true);
-  };
-
-  const handleDeleteUserOpen = (tutorialId) => {
-    setId(tutorialId);
-    setDeleteCreateOpen(true);
   };
 
   useEffect(() => {
@@ -146,17 +107,35 @@ export default function Cards() {
   }
 
   function setUser(id) {
-    let item = data[id - 1];
+    console.log("map id",id)
+    let item = data[id-1];
     setTitle(item.title);
     setDate(item.date);
     setName(item.name);
     setInfo(item.info);
-    setOpen4(true);
-    // setOpen(true);
+    setOpen(true);
+  }
+
+  function updateData() {
+    let item = { name, title, info, date};
+
+    fetch(`http://localhost:3001/users/${id}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    }).then((result) => {
+      result.json().then((response) => {
+        getData();
+      });
+    });
+    setOpen(false);
   }
 
   function deleteUser(id) {
-    console.log(id);
+    console.log("deleted id", id);
     fetch(`http://localhost:3001/users/${id}`, {
       method: "DELETE",
     }).then((result) => {
@@ -225,23 +204,51 @@ export default function Cards() {
         <h1> Cards</h1>
         <Modal
           style={{ background: "white", color: "black" }}
-          open={open4}
+          open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
             <div className="user-box">
-              <input type="text" value={title} />
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
               <label>Title</label>
             </div>
             <div className="user-box">
-              <input type="text" value={date} />
+              <input
+                type="text"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
               <label>Date</label>
             </div>
+            <div className="user-box">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <label>Name</label>
+            </div>
+            <div className="user-box">
+              <input
+                type="text"
+                value={info}
+                onChange={(e) => setInfo(e.target.value)}
+              />
+              <label>Info</label>
+            </div>
             <div className="dialog-btn">
-              <Button variant="contained">Cancel</Button>
-              <Button variant="contained">Update</Button>
+              <Button variant="contained" onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button variant="contained" onClick={updateData}>
+                Update
+              </Button>
             </div>
           </Box>
         </Modal>
@@ -275,8 +282,6 @@ export default function Cards() {
                           aria-label="settings"
                           onClick={() => setShow(true)}
                           onDoubleClick={() => setShow(false)}
-                          handleEditUserOpen={() => handleEditUserOpen(id)}
-                          handleDeleteUserOpen={() => handleDeleteUserOpen(id)}
                         >
                           <Menu
                             className="menuClass"
@@ -289,7 +294,7 @@ export default function Cards() {
                           >
                             <MenuItem
                               component={RouterLink}
-                              onClick={() => setUser(id)}
+                              onClick={() => setUser(item.id)}
                               to="#"
                               sx={{ color: "text.secondary" }}
                             >
@@ -300,7 +305,7 @@ export default function Cards() {
                             </MenuItem>
                             <MenuItem
                               component={RouterLink}
-                              onClick={() => deleteUser(id)}
+                              onClick={() => deleteUser(item.id)}
                               to="#"
                               sx={{ color: "text.secondary" }}
                             >

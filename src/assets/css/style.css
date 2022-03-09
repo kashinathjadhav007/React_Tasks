@@ -92,7 +92,6 @@ input
 {
     
     position: absolute;
-   
     margin-left:550px ;
     margin-top: -690px;
     
@@ -117,7 +116,4 @@ h1
     border: 1px solid black;
 }
 
-.card
-{
-    position: relative;
-}
+

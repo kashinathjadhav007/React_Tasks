@@ -6,6 +6,7 @@ import Register from "./Pages/register";
 import Reset_Password from "./Pages/reset_password";
 import ViewPage from "./Pages/viewPage";
 import Navigation from "./Pages/nav"
+import Cards2 from "./Pages/cards2";
 
 
 const Router=()=>
@@ -18,6 +19,7 @@ const Router=()=>
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/reset" element={<Reset_Password/>}/>
             <Route path="/cards" element={<Cards/>}/>
+            <Route path="/cards2" element={<Cards2/>}/>
             <Route path="/viewCard" element={<ViewPage/>}/>
             <Route path="/faker" element={<Faker/>}></Route>
         </Routes>
