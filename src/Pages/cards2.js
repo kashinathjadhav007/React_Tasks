@@ -58,34 +58,27 @@ const columns = [
   },
 ];
 
-export default function Cards() {
+export default function Cards2() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(6);
   const [APIData, setAPIData] = useState([]);
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [name, setName] = useState("");
   const [info, setInfo] = useState("");
-  const [show, setShow] = useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [id, setId] = useState("");
+  const [show, setShow] = useState(-1);
+  const [id1, setId] = useState("");
   const ref = useRef(null);
-  const open3 = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  
   const handleClose = () => {
     setAnchorEl(null);
     setOpen(false);
   };
 
-    const iconhandler = (tutid) => {
-    setId(tutid);
-    setShow(tutid);
-  };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -95,13 +88,17 @@ export default function Cards() {
     setPage(0);
   };
 
+  const iconhandler = (tutid) => {
+    setId(tutid);
+    setShow(tutid);
+  };
   useEffect(() => {
     getData();
   }, []);
   function getData() {
     fetch("http://localhost:3001/users").then((result) => {
-      result.json().then((response) => {
-        setData(response);
+      result.json().then((res) => {
+        setAPIData(res);
       });
     });
   }
@@ -112,7 +109,6 @@ export default function Cards() {
   }
 
   function setUser(id) {
-    console.log("map id", id);
     let item = data[id - 1];
     setTitle(item.title);
     setDate(item.date);
@@ -121,7 +117,18 @@ export default function Cards() {
     setOpen(true);
   }
 
-  function updateData() {
+  function deleteUser(id) {
+    console.log("ddddddddddddddddddddddddd", id);
+    fetch(`http://localhost:3001/users/${id}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json().then((response) => {
+        getData();
+      });
+    });
+  }
+
+  function updateData(id) {
     let item = { name, title, info, date };
 
     fetch(`http://localhost:3001/users/${id}`, {
@@ -138,18 +145,6 @@ export default function Cards() {
     });
     setOpen(false);
   }
-
-  function deleteUser(id) {
-    fetch(`http://localhost:3001/users/${id}`, {
-      method: "DELETE",
-    }).then((result) => {
-      result.json().then((response) => {
-        getData();
-        handleClose();
-      });
-    });
-  }
-
   return (
     <div className="main">
       <header>
@@ -170,7 +165,7 @@ export default function Cards() {
                   aria-label="Search"
                   placeholder="Search card"
                   onChange={(e) => {
-                    setSearch(e.target.value);
+                    // setSearch(e.target.value);
                   }}
                 />
                 <button
@@ -215,36 +210,12 @@ export default function Cards() {
         >
           <Box sx={style}>
             <div className="user-box">
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
+              <input type="text" value={title} />
               <label>Title</label>
             </div>
             <div className="user-box">
-              <input
-                type="text"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
+              <input type="text" value={date} />
               <label>Date</label>
-            </div>
-            <div className="user-box">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <label>Name</label>
-            </div>
-            <div className="user-box">
-              <input
-                type="text"
-                value={info}
-                onChange={(e) => setInfo(e.target.value)}
-              />
-              <label>Info</label>
             </div>
             <div className="dialog-btn">
               <Button variant="contained" onClick={handleClose}>
@@ -257,9 +228,8 @@ export default function Cards() {
           </Box>
         </Modal>
 
-        <Box className="box">
-          {data
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+        <Box className="box" style={{ border: "1px solid red" }}>
+          {APIData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .filter((val) => {
               if (val.name.toLowerCase().includes(search.toLowerCase())) {
                 return val;
@@ -268,7 +238,10 @@ export default function Cards() {
             .map((item) => {
               const { name, id, image, title, date, info } = item;
               return (
-                <Box className="inner-class" key={id}>
+                <Box
+                  className="inner-class"
+                  style={{ border: "1px solid green" }}
+                >
                   <Card
                     className="card"
                     key={id}
@@ -283,11 +256,6 @@ export default function Cards() {
                       action={
                         <IconButton
                           // key={id}
-                          // aria-label="settings"
-                          // onClick={() => setShow(true)}
-                          // onDoubleClick={() => setShow(false)}
-
-                          // key={id}
                           aria-label="settings"
                           // onClick={() => setShow(true)}
                           onClick={() => iconhandler(id)}
@@ -295,16 +263,16 @@ export default function Cards() {
                         >
                           <Menu
                             className="menuClass"
-                            open={show}
+                            open={show === id}
                             anchorEl={ref.current}
-                            onClose={() => setShow(false)}
+                            onClose={() => setShow(-1)}
                             PaperProps={{
                               sx: { width: 80, maxWidth: "100%" },
                             }}
                           >
                             <MenuItem
                               component={RouterLink}
-                              onClick={() => setUser(item.id)}
+                              onClick={() => setUser(id)}
                               to="#"
                               sx={{ color: "text.secondary" }}
                             >
@@ -315,7 +283,7 @@ export default function Cards() {
                             </MenuItem>
                             <MenuItem
                               component={RouterLink}
-                              onClick={() => deleteUser(item.id)}
+                              onClick={() => deleteUser(id)}
                               to="#"
                               sx={{ color: "text.secondary" }}
                             >
@@ -354,7 +322,7 @@ export default function Cards() {
       <footer className="page-footer">
         <TablePagination
           component="div"
-          count={data.length}
+          // count={data.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

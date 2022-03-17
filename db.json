@@ -5,7 +5,7 @@
       "name": "tree",
       "date": "September 14",
       "image": "Images/tree.jpg",
-      "title": "Tree2",
+      "title": "Tree",
       "info": "industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
     },
     {
@@ -15,45 +15,39 @@
       "image": "Images/car.jpg",
       "title": "car",
       "info": "industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
-    },
+    }
+    ,
     {
       "id": 3,
-      "name": "bike",
-      "date": "September 14, 2020",
-      "image": "Images/bike.jpg",
-      "title": "Bike",
-      "info": "industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
-    },
-    {
-      "id": 4,
       "name": "nature",
-      "date": "September 14, 2033",
+      "date": "September 16, 2016",
       "image": "Images/nature.jpg",
       "title": "nature",
+      "info": "industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
+    } ,
+    {
+      "id": 4,
+      "name": "tree",
+      "date": "September 14",
+      "image": "Images/tree.jpg",
+      "title": "Tree",
       "info": "industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
     },
     {
       "id": 5,
-      "name": "tree1",
-      "date": "September 14",
-      "image": "Images/tree.jpg",
-      "title": "Tree1",
-      "info": "industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
-    },
-    {
-      "id": 7,
-      "name": "nature",
-      "date": "September 14, 2033",
-      "image": "Images/nature.jpg",
-      "title": "nature",
-      "info": "industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
-    },
-    {
-      "id": 8,
       "name": "car",
       "date": "September 14, 2016",
       "image": "Images/car.jpg",
       "title": "car",
+      "info": "industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
+    }
+    ,
+    {
+      "id": 6,
+      "name": "nature",
+      "date": "September 16, 2016",
+      "image": "Images/nature.jpg",
+      "title": "nature",
       "info": "industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
     }
   ]

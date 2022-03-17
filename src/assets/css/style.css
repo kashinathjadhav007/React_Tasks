@@ -20,7 +20,7 @@ input
 
 .collapse navbar-collapse {
   flex-grow: 0;
-}
+} */
 .toggle-btn
 {
     display: flex;
@@ -28,7 +28,7 @@ input
     /* justify-content: space-evenly; */
     float: right;
 }
-.container-fluid {
+ .container-fluid {
   padding-left: 20px;
   padding-right: 20px;
   height: 70px;
@@ -74,8 +74,20 @@ input
   border-radius: 20px;
   border: none;
 
+ 
   
+}
+
+.user-box label
+{
+  color: black !important; 
   
+}
+
+input
+{
+  color: black;
+  background: white;
 }
 .MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiMenu-paper MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiPopover-paper css-a8np1v-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper
 {
@@ -88,22 +100,22 @@ input
   display: flex;
   justify-content: space-between;
 }
-.menuClass
+/* .menuClass
 {
     
     position: absolute;
     margin-left:550px ;
     margin-top: -690px;
     
-}
+} */
 
-.inner-class {
+/* .inner-class {
   margin-bottom: 40px;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
   border-radius: 10px;
   position: relative;
 
-}
+} */
 
 h1
 {
@@ -116,4 +128,57 @@ h1
     border: 1px solid black;
 }
 
+.icn-btn
+{
+  position: relative;
+}
+.menuOne
+{
+  position: absolute;
+}
 
+.pop-up
+{
+  display: flex;
+  flex-direction: column;
+}
+.pop-up button
+{
+  /* width: 100px; */
+  background-color: none;
+}
+
+.user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: black;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+
+.iconStyle
+{
+  margin-right: 32px;
+}
+.iconStyle1
+{
+  margin-right: 15px;
+}
+
+/* .info
+{
+ display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+} */
+
+/* .more-text
+{
+  display: none;
+} */
