@@ -6,6 +6,10 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Modal from "@mui/material/Modal";
+import { positions } from "@mui/system";
+import { styled } from "@mui/system";
+import ModalUnstyled from "@mui/base/ModalUnstyled";
+import { AiFillEdit, AiTwotoneDelete } from "react-icons/ai";
 import {
   Menu,
   MenuItem,
@@ -28,17 +32,62 @@ import { Link as RouterLink } from "react-router-dom";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import img1 from "../Images/logo.png";
 import "../assets/css/style.css";
+const StyledModal = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
+const Backdrop = styled("div")`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+`;
+
+const style1 = {
+  position: "absolute",
+  width: 400,
+  bgcolor: "white",
+  color: "black",
+  border: "3px solid black",
+  p: 2,
+  px: 4,
+  pb: 3,
+};
+
+const style2 = {
+  position: "absolute",
+  width: 100,
+  bgcolor: "white",
+  color: "black",
+  border: "3px solid black",
+  p: 2,
+  px: 4,
+  pb: 3,
+};
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
+  color: "black",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
+  backgroundColor: "rgb(255, 255, 255)",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  opacity: 1,
 };
 
 const columns = [
@@ -58,13 +107,14 @@ const columns = [
   },
 ];
 
-export default function Cards() {
+export default function Cards3() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(6);
   const [APIData, setAPIData] = useState([]);
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [name, setName] = useState("");
@@ -72,6 +122,8 @@ export default function Cards() {
   const [show, setShow] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [id, setId] = useState("");
+  const [status, setStatus] = React.useState(true);
+  const[hide,setHide]=useState(true)
   const ref = useRef(null);
   const open3 = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -82,7 +134,10 @@ export default function Cards() {
     setOpen(false);
   };
 
-    const iconhandler = (tutid) => {
+  const handleOpen1 = () => setOpen1(true);
+  const handleClose1 = () => setOpen1(false);
+
+  const iconhandler = (tutid) => {
     setId(tutid);
     setShow(tutid);
   };
@@ -112,7 +167,6 @@ export default function Cards() {
   }
 
   function setUser(id) {
-    console.log("map id", id);
     let item = data[id - 1];
     setTitle(item.title);
     setDate(item.date);
@@ -201,13 +255,11 @@ export default function Cards() {
           </div>
         </nav>
       </header>
-
       <div className="banner"></div>
       <div class="container">
         <br></br>
         <h1> Cards</h1>
         <Modal
-          style={{ background: "white", color: "black" }}
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
@@ -281,53 +333,80 @@ export default function Cards() {
                         </Avatar>
                       }
                       action={
-                        <IconButton
-                          // key={id}
-                          // aria-label="settings"
-                          // onClick={() => setShow(true)}
-                          // onDoubleClick={() => setShow(false)}
-
-                          // key={id}
-                          aria-label="settings"
-                          // onClick={() => setShow(true)}
-                          onClick={() => iconhandler(id)}
-                          onDoubleClick={() => setShow(false)}
-                        >
-                          <Menu
-                            className="menuClass"
-                            open={show}
-                            anchorEl={ref.current}
-                            onClose={() => setShow(false)}
-                            PaperProps={{
-                              sx: { width: 80, maxWidth: "100%" },
-                            }}
+                        <div className="icn-btn">
+                          <IconButton
+                            aria-label="settings"
+                            onClick={() => iconhandler(id)}
+                            // onDoubleClick={() => setShow(false)}
+                            onClick={() => setStatus(!status)}
                           >
-                            <MenuItem
-                              component={RouterLink}
-                              onClick={() => setUser(item.id)}
-                              to="#"
-                              sx={{ color: "text.secondary" }}
-                            >
-                              <ListItemText
-                                primary="Edit"
-                                primaryTypographyProps={{ variant: "body2" }}
-                              />
-                            </MenuItem>
-                            <MenuItem
-                              component={RouterLink}
-                              onClick={() => deleteUser(item.id)}
-                              to="#"
-                              sx={{ color: "text.secondary" }}
-                            >
-                              <ListItemText
-                                primary="delete"
-                                primaryTypographyProps={{ variant: "body2" }}
-                              />
-                            </MenuItem>
-                          </Menu>
+                            {status ? (
+                              <div className="pop-up">
+                                <button
+                                  onClick={() => setUser(id)}
+                                  type="button"
+                                  class="btn btn-light"
+                                >
+                                  <AiFillEdit className="iconStyle" />
+                                  Edit
+                                </button>
+                                <button
+                                  onClick={handleOpen1}
+                                  type="button"
+                                  class="btn btn-light"
+                                >
+                                  <AiTwotoneDelete className="iconStyle1"/>
+                                  Delete
+                                </button>
+                              </div>
+                            ) : null}
+                            {/* <div className="menuOne">
+                              <Menu
+                                open={show}
+                                anchorEl={ref.current}
+                                onClose={() => setShow(false)}
+                              >
+                                <MenuItem onClick={() => setUser(id)}>
+                                  <ListItemText primary="Edit" />
+                                </MenuItem>
+                                <MenuItem onClick={handleOpen1}>
+                                  <ListItemText primary="delete" />
+                                </MenuItem>
+                              </Menu>
+                            </div> */}
+                            <MoreVertIcon />
+                          </IconButton>
+                          <StyledModal
+                            aria-labelledby="unstyled-modal-title"
+                            aria-describedby="unstyled-modal-description"
+                            open={open1}
+                            onClose={handleClose1}
+                            BackdropComponent={Backdrop}
+                          >
+                            <Box sx={style1}>
+                              <p id="unstyled-modal-description">
+                                <h6>DELETE CARD</h6>
+                                are You sure to delete this card
+                              </p>
+                              <br></br>
 
-                          <MoreVertIcon />
-                        </IconButton>
+                              <div className="dialog-btn">
+                                <Button
+                                  variant="contained"
+                                  onClick={handleClose}
+                                >
+                                  Cancel
+                                </Button>
+                                <Button
+                                  variant="contained"
+                                  onClick={() => deleteUser(item.id)}
+                                >
+                                  Delete
+                                </Button>
+                              </div>
+                            </Box>
+                          </StyledModal>
+                        </div>
                       }
                       title={name}
                       subheader={date}
@@ -340,8 +419,20 @@ export default function Cards() {
                       onClick={() => redirectHandler(title, date, name, info)}
                     />
                     <CardContent>
-                      <Typography variant="body2" color="text.secondary">
-                        {info}
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        className="info"
+                      >
+                        <p className="text">
+                          industry. Lorem Ipsum has been the industry's standard
+                          dummy text ever since the 1500s, when an unknown <span onClick={() => setHide(!hide)}>...</span>
+                          {hide ? ( <span className="more-text">
+                          printer took a galley of type and scrambled it to make
+                          a type specimen book. It has survived not only five
+                          centuries, but also the</span>):null
+                              }
+                        </p>
                       </Typography>
                     </CardContent>
                   </Card>
